@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상품 계산 - 몽글 마트 무인 계산대</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 모든 화면 공통 상단 헤더 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-link">몽글 마트</a>
+    </div>
+  </header>
+
+  <!-- 본문 (가운데 정렬, 최대 너비 960px) -->
+  <main class="page-container">
+    <div class="scan-layout">
+      <!-- 왼쪽(모바일에서는 위쪽): 정사각형 카메라 영상과 한 줄 인식 상태 -->
+      <section class="card camera-panel" aria-label="카메라 영역">
+        <div class="camera-box">
+          <video id="scan-video" playsinline muted autoplay></video>
+        </div>
+
+        <!-- 인식 상태 한 줄 안내 -->
+        <div id="scan-status" class="scan-status" role="status" aria-live="polite">
+          모델 불러오는 중...
+        </div>
+
+        <!-- 카메라 또는 모델 오류 발생 시 이유와 해결 방법을 보여줍니다. -->
+        <section id="scan-error-box" class="error-box" hidden>
+          <p id="scan-error-title" class="error-title"></p>
+          <p id="scan-error-guide" class="error-guide"></p>
+        </section>
+      </section>
+
+      <!-- 오른쪽(모바일에서는 아래쪽): 장바구니 영역 -->
+      <section class="card cart-panel" aria-label="장바구니">
+        <h1 class="cart-title">장바구니</h1>
+
+        <div class="cart-empty">아직 담은 상품이 없어요</div>
+
+        <div class="cart-summary">
+          <span class="cart-total-label">합계</span>
+          <strong class="cart-total-value">0원</strong>
+        </div>
+
+        <!-- 이번 단계에서는 장바구니에 상품을 담지 않으므로 비활성화 상태로 둡니다. -->
+        <button type="button" class="primary-button checkout-button" disabled>결제하기</button>
+      </section>
+    </div>
+  </main>
+
+  <!-- AGENTS.md 규칙에 따라 고정된 TensorFlow.js 및 Teachable Machine 라이브러리 -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.5/dist/teachablemachine-image.min.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/recognizer.js"></script>
+  <script src="js/scan.js"></script>
+</body>
+</html>
