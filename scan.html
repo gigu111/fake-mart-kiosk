@@ -17,7 +17,7 @@
   <!-- 본문 (가운데 정렬, 최대 너비 960px) -->
   <main class="page-container">
     <div class="scan-layout">
-      <!-- 왼쪽(모바일에서는 위쪽): 정사각형 카메라 영상, 진행 막대, 인식 상태 -->
+      <!-- 왼쪽(모바일에서는 위쪽): 카메라 영상, 진행 막대, 인식 상태, 직접 담기 -->
       <section class="card camera-panel" aria-label="카메라 영역">
         <div class="camera-box">
           <video id="scan-video" playsinline muted autoplay></video>
@@ -48,11 +48,20 @@
           <p id="scan-error-title" class="error-title"></p>
           <p id="scan-error-guide" class="error-guide"></p>
         </section>
+
+        <!-- 인식이 잘 안 되는 상품을 손으로 직접 담는 버튼 목록 -->
+        <section class="manual-add-section" aria-label="직접 담기">
+          <h2 class="manual-add-title">직접 담기</h2>
+          <div id="manual-add-grid" class="manual-add-grid"></div>
+        </section>
       </section>
 
       <!-- 오른쪽(모바일에서는 아래쪽): 장바구니 영역 -->
       <section class="card cart-panel" aria-label="장바구니">
-        <h1 class="cart-title">장바구니</h1>
+        <div class="cart-header">
+          <h1 class="cart-title">장바구니</h1>
+          <button id="clear-cart-button" type="button" class="clear-cart-button" hidden>전체 비우기</button>
+        </div>
 
         <div id="cart-empty" class="cart-empty">아직 담은 상품이 없어요</div>
 
@@ -69,7 +78,7 @@
           </div>
         </div>
 
-        <!-- 장바구니에 상품이 있을 때만 활성화되며, 결제 이동은 다음 단계에서 연결합니다. -->
+        <!-- 장바구니에 상품이 있을 때만 활성화되며, 결제 화면 이동은 추후 연결합니다. -->
         <button id="checkout-button" type="button" class="primary-button checkout-button" disabled>결제하기</button>
       </section>
     </div>

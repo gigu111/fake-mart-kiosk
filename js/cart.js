@@ -90,6 +90,82 @@
   }
 
   /**
+   * 장바구니에서 특정 상품의 수량을 1 올립니다.
+   * @param {string} className - 수량을 늘릴 상품의 클래스 이름
+   * @returns {Array<{ className: string, name: string, price: number, quantity: number }>}
+   */
+  function increaseQuantity(className) {
+    if (typeof className !== "string") {
+      return loadItems();
+    }
+
+    const items = loadItems();
+    const target = items.find(function (item) {
+      return item.className === className;
+    });
+
+    if (target) {
+      target.quantity += 1;
+      saveItems(items);
+    }
+
+    return items;
+  }
+
+  /**
+   * 장바구니에서 특정 상품의 수량을 1 줄입니다.
+   * 수량이 1일 때 줄이면 그 상품 줄을 장바구니에서 삭제합니다.
+   * @param {string} className - 수량을 줄일 상품의 클래스 이름
+   * @returns {Array<{ className: string, name: string, price: number, quantity: number }>}
+   */
+  function decreaseQuantity(className) {
+    if (typeof className !== "string") {
+      return loadItems();
+    }
+
+    const items = loadItems();
+    const nextItems = [];
+
+    items.forEach(function (item) {
+      if (item.className !== className) {
+        nextItems.push(item);
+        return;
+      }
+
+      // 수량이 2개 이상이면 1만 줄이고, 1개면 목록에 남기지 않아 줄을 없앱니다.
+      if (item.quantity > 1) {
+        nextItems.push({
+          className: item.className,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity - 1
+        });
+      }
+    });
+
+    saveItems(nextItems);
+    return nextItems;
+  }
+
+  /**
+   * 장바구니에서 특정 상품 줄을 바로 삭제합니다.
+   * @param {string} className - 삭제할 상품의 클래스 이름
+   * @returns {Array<{ className: string, name: string, price: number, quantity: number }>}
+   */
+  function removeItem(className) {
+    if (typeof className !== "string") {
+      return loadItems();
+    }
+
+    const nextItems = loadItems().filter(function (item) {
+      return item.className !== className;
+    });
+
+    saveItems(nextItems);
+    return nextItems;
+  }
+
+  /**
    * 장바구니에 담긴 전체 상품 수량을 계산합니다.
    * @returns {number}
    */
@@ -119,6 +195,9 @@
   global.ShoppingCart = {
     getItems: getItems,
     addItem: addItem,
+    increaseQuantity: increaseQuantity,
+    decreaseQuantity: decreaseQuantity,
+    removeItem: removeItem,
     getTotalQuantity: getTotalQuantity,
     getTotalPrice: getTotalPrice,
     clear: clear
