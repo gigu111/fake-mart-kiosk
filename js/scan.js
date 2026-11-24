@@ -243,6 +243,14 @@
     }
   });
 
+  // "결제하기" 버튼: 장바구니에 상품이 있을 때 결제 화면(pay.html)으로 이동합니다.
+  checkoutButton.addEventListener("click", function () {
+    if (window.ShoppingCart.getItems().length === 0) {
+      return;
+    }
+    window.location.href = "pay.html";
+  });
+
   // 판정 규칙 모듈을 생성합니다. (90% 이상 1초 유지)
   const judge = window.ProductJudge.create({
     threshold: 0.9,

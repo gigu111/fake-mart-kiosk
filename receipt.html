@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결제 완료 - 몽글 마트 무인 계산대</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 모든 화면 공통 상단 헤더 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-link">몽글 마트</a>
+    </div>
+  </header>
+
+  <!-- 본문 (가운데 정렬, 최대 너비 960px) -->
+  <main class="page-container">
+    <!-- 결제를 거치지 않고 바로 들어온 경우 안내 -->
+    <section id="receipt-empty" class="card empty-state-card" hidden>
+      <p class="empty-state-message">주문 내역이 없어요</p>
+      <a href="index.html" class="primary-button">시작 화면으로 가기</a>
+    </section>
+
+    <!-- 저장된 영수증이 있을 때 보여 주는 완료 화면 -->
+    <section id="receipt-content" class="receipt-page" hidden>
+      <h1 class="page-title receipt-heading">결제가 완료되었습니다</h1>
+
+      <section class="card receipt-card" aria-label="영수증">
+        <h2 class="section-title">영수증</h2>
+
+        <dl class="receipt-meta">
+          <div class="receipt-meta-row">
+            <dt>주문 번호</dt>
+            <dd id="receipt-order-number"></dd>
+          </div>
+          <div class="receipt-meta-row">
+            <dt>결제 시각</dt>
+            <dd id="receipt-paid-at"></dd>
+          </div>
+          <div class="receipt-meta-row">
+            <dt>결제 수단</dt>
+            <dd id="receipt-payment-method"></dd>
+          </div>
+        </dl>
+
+        <hr class="receipt-divider">
+
+        <ul id="receipt-item-list" class="order-item-list"></ul>
+
+        <hr class="receipt-divider">
+
+        <div class="receipt-total-row">
+          <span class="cart-total-label">합계</span>
+          <strong id="receipt-total-summary" class="cart-total-value"></strong>
+        </div>
+      </section>
+
+      <button id="new-order-button" type="button" class="primary-button new-order-button">새 주문 시작</button>
+
+      <p class="notice-text receipt-notice">실습용 화면입니다. 실제 결제는 이루어지지 않았습니다.</p>
+    </section>
+  </main>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/order.js"></script>
+  <script src="js/receipt.js"></script>
+</body>
+</html>

@@ -576,6 +576,230 @@ body {
 }
 
 /* =========================
+   결제 화면 (pay.html) 및 완료 화면 (receipt.html)
+   ========================= */
+.pay-page,
+.receipt-page {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.pay-page[hidden],
+.receipt-page[hidden],
+.empty-state-card[hidden] {
+  display: none;
+}
+
+.page-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--text-main);
+}
+
+.section-title {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.85rem;
+}
+
+/* 장바구니/주문 내역 없음 안내 카드 */
+.empty-state-card {
+  max-width: 520px;
+  margin: 2rem auto 0;
+  padding: 2.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.empty-state-message {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* 주문 내역 목록 줄 (결제·영수증 공통) */
+.order-item-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.order-item-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.35rem 0;
+}
+
+.order-item-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  word-break: keep-all;
+}
+
+.order-item-qty {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.order-item-amount {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-main);
+  min-width: 4.5rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.pay-total-value {
+  font-size: 1.8rem;
+}
+
+/* 결제 수단 3개 버튼 */
+.payment-method-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+}
+
+.payment-method-button {
+  min-height: 54px;
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.9rem;
+  border: 1.5px solid #cbd5e1;
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  font-size: 1.02rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.payment-method-button:hover:not(:disabled) {
+  border-color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+.payment-method-button.is-selected {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.payment-method-button.is-selected::before {
+  content: "✓ ";
+}
+
+.payment-method-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* 보조 버튼 (상품 더 담기) */
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0.9rem 1.75rem;
+  border-radius: 1rem;
+  border: 1.5px solid var(--accent);
+  background-color: var(--bg-card);
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 1.08rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.secondary-button:hover {
+  background-color: var(--accent-soft);
+}
+
+.secondary-button.is-disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.pay-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pay-submit-button,
+.pay-more-link,
+.new-order-button {
+  width: 100%;
+}
+
+/* 영수증 메타 정보 */
+.receipt-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.receipt-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.receipt-meta-row dt {
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.receipt-meta-row dd {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  font-variant-numeric: tabular-nums;
+}
+
+.receipt-divider {
+  border: none;
+  border-top: 1px dashed #cbd5e1;
+  margin: 1rem 0;
+}
+
+.receipt-card .order-item-list {
+  margin-bottom: 0;
+}
+
+.receipt-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.receipt-notice {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* =========================
    인식 테스트 화면 (test.html)
    ========================= */
 .test-page {
